@@ -21,3 +21,16 @@ if __name__ == "__main__":
     except FileNotFoundError:
         print(f"Error: File '{file_path}' not found")
         return []
+
+        def send_with_retry(sock, message, address, max_retries=5):
+    timeout = 1.0  # 初始超时1秒
+    for attempt in range(max_retries):
+        try:
+            sock.settimeout(timeout)
+            sock.sendto(message.encode(), address)
+            data, _ = sock.recvfrom(1024)
+            return data.decode()
+        except socket.timeout:
+            print(f"Timeout (attempt {attempt + 1}), retrying...")
+            timeout *= 2  # 指数退避
+    return None
