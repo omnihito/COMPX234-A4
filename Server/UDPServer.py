@@ -31,3 +31,9 @@ def main():
                 target=handle_file_transfer,
                 args=(data.decode().split()[1], addr)
             ).start()
+
+            def send_file_chunk(filename, start, end):
+    with open(f"files/{filename}", "rb") as f:
+        f.seek(start)
+        chunk = f.read(end - start + 1)
+        return base64.b64encode(chunk).decode()

@@ -34,3 +34,5 @@ if __name__ == "__main__":
             print(f"Timeout (attempt {attempt + 1}), retrying...")
             timeout *= 2  # 指数退避
     return None
+
+    print(f"Downloading {filename} [{'*' * received_chunks}]", end='\r')
