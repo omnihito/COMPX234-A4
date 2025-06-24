@@ -13,3 +13,11 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    def process_file_list(file_path):
+    try:
+        with open(file_path) as f:
+            return [line.strip() for line in f if line.strip()]
+    except FileNotFoundError:
+        print(f"Error: File '{file_path}' not found")
+        return []
